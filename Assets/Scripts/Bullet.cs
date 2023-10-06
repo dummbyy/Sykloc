@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private Vector3 mousePos;
     private new Rigidbody2D rigidbody;
 
+    [SerializeField] private ParticleSystem _destroyParticlePrefab;
     [SerializeField] private float m_BulletForce;
     #endregion
     #region Unity Methods
@@ -34,10 +35,10 @@ public class Bullet : MonoBehaviour
         if(col.CompareTag("Hitable"))
         {
             Enemy enemyRef = col.GetComponent<Enemy>();
-            
-            enemyRef.m_Health -= Random.Range(20, 100);
-            enemyRef.Die(enemyRef);
 
+            enemyRef.m_Health -= Random.Range(20, 100);
+            ParticleSystem obj = Instantiate(_destroyParticlePrefab, enemyRef.transform.position, Quaternion.identity);
+            enemyRef.Die(enemyRef, obj);
             Destroy(this.gameObject);
         }
     }

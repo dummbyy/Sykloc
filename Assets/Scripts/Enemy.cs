@@ -81,12 +81,16 @@ public class Enemy : MonoBehaviour
         this.playerRef.m_Health -= damageAmount;
     }
 
-    public void Die(Enemy enemy)
+    public void Die(Enemy enemy, ParticleSystem particle)
     {
         if(enemy.m_Health <= 0)
         {
             Destroy(enemy.gameObject);
+            ParticleSystem obj = particle.GetComponent<ParticleSystem>();
             uiManager.totalScore++;
+            obj.Play();
+            Destroy(obj, obj.main.duration);
+
         }
         if(enemy.m_Health < 0)
         {

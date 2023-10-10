@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     #region Fields
     public Transform parentObj;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject[] enemyPrebabs;
+    [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float nextTimeForSpawn;
     private float spawnTime;
     #endregion
@@ -35,10 +35,10 @@ public class SpawnManager : MonoBehaviour
     #region Methods
     private void SpawnEnemies()
     {
-        int randomEnemy = Random.Range(0, enemyPrebabs.Length);
+        int randomEnemy = Random.Range(0, enemyPrefabs.Length);
         int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
 
-        Instantiate(enemyPrebabs[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity, parentObj);
+        Instantiate(enemyPrefabs[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity, parentObj);
     }
     #endregion
 }
